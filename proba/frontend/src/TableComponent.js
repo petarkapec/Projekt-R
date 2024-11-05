@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const server_url = "http://localhost:8080/api/svaOcitanja";
+
 function TableComponent() {
     const [ocitanja, setOcitanja] = useState([]);
     const [sortConfig, setSortConfig] = useState(null);
