@@ -1,6 +1,8 @@
 package hr.unizg.fer.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -20,6 +22,10 @@ public class Radnik {
 
     @Column(name = "telefon_radnik", length = 20)
     private String telefon;
+
+    @JsonIgnore  // Ovdje označavamo sifru da se ne šalje u JSON odgovoru
+    @Column(name = "sifra_radnik", nullable = false, length = 20)
+    private String sifra;
 
     @OneToMany(mappedBy = "radnik", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -64,5 +70,13 @@ public class Radnik {
 
     public void setNalozi(List<Nalog> nalozi) {
         this.nalozi = nalozi;
+    }
+
+    public String getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RadnikRepository extends JpaRepository<Radnik, Integer> {
     List<Radnik> findAll();
+    Radnik findByTelefonAndSifra(String telefon, String sifra);
 }

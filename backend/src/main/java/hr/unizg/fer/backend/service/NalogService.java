@@ -17,4 +17,8 @@ public class NalogService {
     public List<Nalog> getAllNaloge() {
         return nalogRepository.findAll();
     }
+
+    public List<Nalog> findByRadnikId(Integer idRadnik) {
+        return nalogRepository.findByRadnikId(idRadnik);
+    }
 }
