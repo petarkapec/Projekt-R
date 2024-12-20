@@ -1,0 +1,16 @@
+GET http://localhost:8080/api/brojila/all
+
+###
+GET http://localhost:8080/api/kupci/all
+
+###
+GET http://localhost:8080/api/nalozi/all
+
+###
+GET http://localhost:8080/api/ocitanja/all
+
+###
+GET http://localhost:8080/api/radnici/all
+
+###
+GET http://localhost:8080/api/stavkenaloga/all

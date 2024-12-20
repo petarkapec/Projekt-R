@@ -1,0 +1,83 @@
+package hr.unizg.fer.backend.entity;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+
+@Entity
+@Table(name = "ocitanje", schema = "public")
+public class Ocitanje {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ocitanje_id_gen")
+    @SequenceGenerator(name = "ocitanje_id_gen", sequenceName = "ocitanje_id_ocitanje_seq", allocationSize = 1)
+    @Column(name = "id_ocitanje", nullable = false)
+    private Integer id;
+
+    @Column(name = "datum_ocitavanja", nullable = false)
+    private Instant datumOcitavanja;
+
+    @Column(name = "tarifa_visoka", precision = 10, scale = 2)
+    private BigDecimal tarifaVisoka;
+
+    @Column(name = "tarifa_niska", precision = 10, scale = 2)
+    private BigDecimal tarifaNiska;
+
+    @Column(name = "komentar", length = Integer.MAX_VALUE)
+    private String komentar;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_nalog")
+    @JsonBackReference
+    private Nalog idNalog;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Instant getDatumOcitavanja() {
+        return datumOcitavanja;
+    }
+
+    public void setDatumOcitavanja(Instant datumOcitavanja) {
+        this.datumOcitavanja = datumOcitavanja;
+    }
+
+    public BigDecimal getTarifaVisoka() {
+        return tarifaVisoka;
+    }
+
+    public void setTarifaVisoka(BigDecimal tarifaVisoka) {
+        this.tarifaVisoka = tarifaVisoka;
+    }
+
+    public BigDecimal getTarifaNiska() {
+        return tarifaNiska;
+    }
+
+    public void setTarifaNiska(BigDecimal tarifaNiska) {
+        this.tarifaNiska = tarifaNiska;
+    }
+
+    public String getKomentar() {
+        return komentar;
+    }
+
+    public void setKomentar(String komentar) {
+        this.komentar = komentar;
+    }
+
+    public Nalog getIdNalog() {
+        return idNalog;
+    }
+
+    public void setIdNalog(Nalog idNalog) {
+        this.idNalog = idNalog;
+    }
+
+}
