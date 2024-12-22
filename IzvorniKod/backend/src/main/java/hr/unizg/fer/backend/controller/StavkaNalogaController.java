@@ -1,10 +1,9 @@
 package hr.unizg.fer.backend.controller;
 
+import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.entity.StavkaNaloga;
 import hr.unizg.fer.backend.service.StavkaNalogaService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,15 @@ public class StavkaNalogaController {
     @GetMapping("/all")
     public List<StavkaNaloga> getAllStavkeNaloga(){
         return stavkaNalogaService.allStavkeNaloga();
+    }
+
+    @PostMapping("/create")
+    public StavkaNaloga createStavkaNaloga(@RequestBody StavkaNaloga stavkaNaloga) {
+        return stavkaNalogaService.createStavkaNaloga(stavkaNaloga);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteStavkaNaloga(@PathVariable Integer id) {
+        stavkaNalogaService.deleteStavkaNaloga(id);
     }
 }

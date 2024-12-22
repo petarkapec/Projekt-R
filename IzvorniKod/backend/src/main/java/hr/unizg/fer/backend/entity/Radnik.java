@@ -11,7 +11,8 @@ import java.util.Set;
 @Table(name = "radnik", schema = "public")
 public class Radnik {
     @Id
-    @ColumnDefault("nextval('radnik_id_radnik_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "radnik_seq")
+    @SequenceGenerator(name = "radnik_seq", sequenceName = "radnik_id_radnik_seq", allocationSize = 1)
     @Column(name = "id_radnik", nullable = false)
     private Integer id;
 
@@ -25,7 +26,7 @@ public class Radnik {
     private String telefonRadnik;
 
     @OneToMany(mappedBy = "idRadnik")
-    @JsonManagedReference
+    @JsonManagedReference("radnik-nalozi")
     private Set<Nalog> nalogs = new LinkedHashSet<>();
 
     public Set<Nalog> getNalogs() {

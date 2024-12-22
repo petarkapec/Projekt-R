@@ -2,9 +2,7 @@ package hr.unizg.fer.backend.controller;
 
 import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.service.KupacService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,15 @@ public class KupacController {
     @GetMapping("/all")
     public List<Kupac> getAllKupci(){
         return kupacService.allKupci();
+    }
+
+    @PostMapping("/create")
+    public Kupac createKupac(@RequestBody Kupac kupac) {
+        return kupacService.createKupac(kupac);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteKupac(@PathVariable Integer id) {
+        kupacService.deleteKupac(id);
     }
 }

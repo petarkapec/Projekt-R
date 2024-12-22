@@ -20,4 +20,12 @@ public class KupacService {
     public List<Kupac> allKupci() {
         return kupacRepository.findAll();
     }
+
+    public Kupac createKupac(Kupac kupac){
+        return kupacRepository.save(kupac);
+    }
+
+    public void deleteKupac(Integer id) {
+        kupacRepository.deleteById(id);
+    }
 }

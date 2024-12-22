@@ -2,9 +2,7 @@ package hr.unizg.fer.backend.controller;
 
 import hr.unizg.fer.backend.entity.Radnik;
 import hr.unizg.fer.backend.service.RadnikService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,15 @@ public class RadnikController {
     @GetMapping("/all")
     public List<Radnik> getAllRadnici(){
         return radnikService.allRadnici();
+    }
+
+    @PostMapping("/create")
+    public Radnik createRadnik(@RequestBody Radnik radnik){
+        return radnikService.createRadnik(radnik);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteRadnik(@PathVariable Integer id) {
+        radnikService.deleteRadnik(id);
     }
 }

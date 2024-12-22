@@ -1,10 +1,9 @@
 package hr.unizg.fer.backend.controller;
 
+import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.entity.Ocitanje;
 import hr.unizg.fer.backend.service.OcitanjeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,15 @@ public class OcitanjeController {
     @GetMapping("/all")
     public List<Ocitanje> getAllOcitanja(){
         return ocitanjeService.allOcitanja();
+    }
+
+    @PostMapping("/create")
+    public Ocitanje createOcitanje(@RequestBody Ocitanje ocitanje) {
+        return ocitanjeService.createOcitanje(ocitanje);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteOcitanje(@PathVariable Integer id) {
+        ocitanjeService.deleteOcitanje(id);
     }
 }

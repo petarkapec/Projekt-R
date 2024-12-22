@@ -8,13 +8,14 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "stavka_naloga", schema = "public")
 public class StavkaNaloga {
     @Id
-    @ColumnDefault("nextval('stavka_naloga_id_stavka_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stavka_naloga_seq")
+    @SequenceGenerator(name = "stavka_naloga_seq", sequenceName = "stavka_naloga_id_stavka_naloga_seq", allocationSize = 1)
     @Column(name = "id_stavka", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_nalog")
-    @JsonBackReference
+    @JsonBackReference("nalog-stavke")
     private Nalog idNalog;
 
     @Column(name = "adresa_brojila", length = 100)
@@ -22,7 +23,7 @@ public class StavkaNaloga {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_brojilo")
-    @JsonBackReference
+    @JsonBackReference("brojilo-stavke")
     private Brojilo idBrojilo;
 
     public Brojilo getIdBrojilo() {

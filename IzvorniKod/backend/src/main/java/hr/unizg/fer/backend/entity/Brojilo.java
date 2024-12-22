@@ -12,7 +12,8 @@ import java.util.Set;
 @Table(name = "brojilo", schema = "public")
 public class Brojilo {
     @Id
-    @ColumnDefault("nextval('brojilo_id_brojilo_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "brojilo_seq")
+    @SequenceGenerator(name = "brojilo_seq", sequenceName = "brojilo_id_brojilo_seq", allocationSize = 1)
     @Column(name = "id_brojilo", nullable = false)
     private Integer id;
 
@@ -27,11 +28,11 @@ public class Brojilo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_kupac")
-    @JsonBackReference
+    @JsonBackReference("kupac-brojila")
     private Kupac idKupac;
 
     @OneToMany(mappedBy = "idBrojilo")
-    @JsonManagedReference
+    @JsonManagedReference("brojilo-stavke")
     private Set<StavkaNaloga> stavkaNalogas = new LinkedHashSet<>();
 
     public Set<StavkaNaloga> getStavkaNalogas() {

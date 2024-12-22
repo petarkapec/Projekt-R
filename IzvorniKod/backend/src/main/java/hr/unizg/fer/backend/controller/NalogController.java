@@ -1,10 +1,10 @@
 package hr.unizg.fer.backend.controller;
 
+import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.entity.Nalog;
+import hr.unizg.fer.backend.entity.Radnik;
 import hr.unizg.fer.backend.service.NalogService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +20,20 @@ public class NalogController {
     @GetMapping("/all")
     public List<Nalog> getAllNalozi(){
         return nalogService.allNalozi();
+    }
+
+    @GetMapping("/radnik/{radnikId}")
+    public List<Nalog> getAllNaloziByRadnikId(@PathVariable Radnik radnikId){
+        return nalogService.getAllNaloziByRadnikId(radnikId);
+    }
+
+    @PostMapping("/create")
+    public Nalog createNalog(@RequestBody Nalog nalog) {
+        return nalogService.createNalog(nalog);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteNalog(@PathVariable Integer id) {
+        nalogService.deleteNalog(id);
     }
 }

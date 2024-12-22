@@ -1,10 +1,9 @@
 package hr.unizg.fer.backend.controller;
 
 import hr.unizg.fer.backend.entity.Brojilo;
+import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.service.BrojiloService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,15 @@ public class BrojiloController {
     @GetMapping("/all")
     public List<Brojilo> getAllBrojila(){
         return brojiloService.allBrojila();
+    }
+
+    @PostMapping("/create")
+    public Brojilo createBrojilo(@RequestBody Brojilo brojilo) {
+        return brojiloService.createBrojilo(brojilo);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteBrojilo(@PathVariable Integer id) {
+        brojiloService.deleteBrojilo(id);
     }
 }

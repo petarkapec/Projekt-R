@@ -12,6 +12,8 @@ import java.util.List;
 public class RadnikService {
     @Autowired
     private final RadnikRepository radnikRepository;
+    @Autowired
+    private KupacRepository kupacRepository;
 
     public RadnikService(RadnikRepository radnikRepository){
         this.radnikRepository = radnikRepository;
@@ -19,5 +21,13 @@ public class RadnikService {
 
     public List<Radnik> allRadnici(){
         return radnikRepository.findAll();
+    }
+
+    public Radnik createRadnik(Radnik radnik){
+        return radnikRepository.save(radnik);
+    }
+
+    public void deleteRadnik(Integer id) {
+        radnikRepository.deleteById(id);
     }
 }

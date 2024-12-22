@@ -13,7 +13,8 @@ import java.util.Set;
 @Table(name = "kupac", schema = "public")
 public class Kupac {
     @Id
-    @ColumnDefault("nextval('kupac_id_kupac_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "kupac_seq")
+    @SequenceGenerator(name = "kupac_seq", sequenceName = "kupac_id_kupac_seq", allocationSize = 1)
     @Column(name = "id_kupac", nullable = false)
     private Integer id;
 
@@ -27,7 +28,7 @@ public class Kupac {
     private String telefonKupac;
 
     @OneToMany(mappedBy = "idKupac")
-    @JsonManagedReference
+    @JsonManagedReference("kupac-brojila")
     private List<Brojilo> brojila = new ArrayList<>();
 
     public List<Brojilo> getBrojila() {

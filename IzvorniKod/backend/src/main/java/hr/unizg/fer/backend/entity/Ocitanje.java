@@ -10,8 +10,8 @@ import java.time.Instant;
 @Table(name = "ocitanje", schema = "public")
 public class Ocitanje {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ocitanje_id_gen")
-    @SequenceGenerator(name = "ocitanje_id_gen", sequenceName = "ocitanje_id_ocitanje_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ocitanje_seq")
+    @SequenceGenerator(name = "ocitanje_seq", sequenceName = "ocitanje_id_ocitanje_seq", allocationSize = 1)
     @Column(name = "id_ocitanje", nullable = false)
     private Integer id;
 
@@ -29,7 +29,7 @@ public class Ocitanje {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_nalog")
-    @JsonBackReference
+    @JsonBackReference("nalog-ocitanja")
     private Nalog idNalog;
 
     public Integer getId() {

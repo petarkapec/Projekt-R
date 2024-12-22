@@ -1,6 +1,7 @@
 package hr.unizg.fer.backend.service;
 
 import hr.unizg.fer.backend.entity.Brojilo;
+import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.repository.BrojiloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,13 @@ public class BrojiloService {
 
     public List<Brojilo> allBrojila() {
         return brojiloRepository.findAll();
+    }
+
+    public Brojilo createBrojilo(Brojilo brojilo){
+        return brojiloRepository.save(brojilo);
+    }
+
+    public void deleteBrojilo(Integer id) {
+        brojiloRepository.deleteById(id);
     }
 }
