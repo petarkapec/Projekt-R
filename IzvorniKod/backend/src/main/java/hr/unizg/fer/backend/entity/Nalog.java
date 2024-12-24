@@ -3,7 +3,6 @@ package hr.unizg.fer.backend.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -29,28 +28,28 @@ public class Nalog {
     @JsonBackReference("radnik-nalozi")
     private Radnik idRadnik;
 
-    @OneToMany(mappedBy = "idNalog")
+    @OneToMany(mappedBy = "idNalog",cascade = CascadeType.ALL)
     @JsonManagedReference("nalog-ocitanja")
-    private Set<Ocitanje> ocitanjes = new LinkedHashSet<>();
+    private Set<Ocitanje> ocitanja = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idNalog")
+    @OneToMany(mappedBy = "idNalog", cascade = CascadeType.ALL)
     @JsonManagedReference("nalog-stavke")
-    private Set<StavkaNaloga> stavkaNalogas = new LinkedHashSet<>();
+    private Set<StavkaNaloga> stavkeNaloga = new LinkedHashSet<>();
 
-    public Set<StavkaNaloga> getStavkaNalogas() {
-        return stavkaNalogas;
+    public Set<StavkaNaloga> getStavkeNaloga() {
+        return stavkeNaloga;
     }
 
-    public void setStavkaNalogas(Set<StavkaNaloga> stavkaNalogas) {
-        this.stavkaNalogas = stavkaNalogas;
+    public void setStavkeNaloga(Set<StavkaNaloga> stavkaNalogas) {
+        this.stavkeNaloga = stavkaNalogas;
     }
 
-    public Set<Ocitanje> getOcitanjes() {
-        return ocitanjes;
+    public Set<Ocitanje> getOcitanja() {
+        return ocitanja;
     }
 
-    public void setOcitanjes(Set<Ocitanje> ocitanjes) {
-        this.ocitanjes = ocitanjes;
+    public void setOcitanja(Set<Ocitanje> ocitanjes) {
+        this.ocitanja = ocitanjes;
     }
 
     public Radnik getIdRadnik() {

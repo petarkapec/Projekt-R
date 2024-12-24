@@ -27,7 +27,7 @@ public class Kupac {
     @Column(name = "telefon_kupac", length = 20)
     private String telefonKupac;
 
-    @OneToMany(mappedBy = "idKupac")
+    @OneToMany(mappedBy = "idKupac", cascade = CascadeType.ALL)
     @JsonManagedReference("kupac-brojila")
     private List<Brojilo> brojila = new ArrayList<>();
 

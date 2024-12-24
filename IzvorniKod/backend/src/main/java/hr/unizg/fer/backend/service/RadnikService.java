@@ -23,8 +23,8 @@ public class RadnikService {
         return radnikRepository.findAll();
     }
 
-    public Radnik createRadnik(Radnik radnik){
-        return radnikRepository.save(radnik);
+    public void createRadnik(Radnik radnik){
+        radnikRepository.save(radnik);
     }
 
     public void deleteRadnik(Integer id) {

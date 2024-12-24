@@ -1,9 +1,11 @@
 package hr.unizg.fer.backend.service;
 
-import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.entity.Nalog;
 import hr.unizg.fer.backend.entity.Radnik;
+import hr.unizg.fer.backend.entity.StavkaNaloga;
 import hr.unizg.fer.backend.repository.NalogRepository;
+import hr.unizg.fer.backend.repository.StavkaNalogaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +16,45 @@ public class NalogService {
     @Autowired
     private final NalogRepository nalogRepository;
 
-    public NalogService(NalogRepository nalogRepository){
+    @Autowired
+    private StavkaNalogaRepository stavkaNalogaRepository;
+
+    public NalogService(NalogRepository nalogRepository, StavkaNalogaRepository stavkaNalogaRepository){
         this.nalogRepository = nalogRepository;
+        this.stavkaNalogaRepository = stavkaNalogaRepository;
     }
 
     public List<Nalog> allNalozi(){
         return nalogRepository.findAll();
     }
 
+    public Nalog getNalogById(Integer id){
+        return nalogRepository.findById(id)
+                .orElseThrow((() -> new EntityNotFoundException("Nije pronađen nalog sa id: " + id)));
+    }
+
     public List<Nalog> getAllNaloziByRadnikId(Radnik radnikId){
         return nalogRepository.findByIdRadnik(radnikId);
     }
 
-    public Nalog createNalog(Nalog nalog){
-        return nalogRepository.save(nalog);
+    public void createNalog(Nalog nalog){
+        nalogRepository.save(nalog);
     }
 
     public void deleteNalog(Integer id) {
-        nalogRepository.deleteById(id);
+        Nalog nalog = nalogRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nije pronađen nalog sa id: " + id));
+        nalogRepository.delete(nalog);
+    }
+
+    public void addStavkaToNalog(Integer nalogId, StavkaNaloga stavkaNaloga) {
+        Nalog nalog = nalogRepository.findById(nalogId)
+                .orElseThrow(() -> new EntityNotFoundException("Nije pronađen nalog sa id: " + nalogId));
+
+        stavkaNaloga.setIdNalog(nalog);
+        nalog.getStavkeNaloga().add(stavkaNaloga);
+
+        stavkaNalogaRepository.save(stavkaNaloga);
+        nalogRepository.save(nalog);
     }
 }

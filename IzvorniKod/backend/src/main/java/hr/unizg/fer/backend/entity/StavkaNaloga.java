@@ -8,8 +8,8 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "stavka_naloga", schema = "public")
 public class StavkaNaloga {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stavka_naloga_seq")
-    @SequenceGenerator(name = "stavka_naloga_seq", sequenceName = "stavka_naloga_id_stavka_naloga_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stavka_seq")
+    @SequenceGenerator(name = "stavka_seq", sequenceName = "stavka_naloga_id_stavka_seq", allocationSize = 1)
     @Column(name = "id_stavka", nullable = false)
     private Integer id;
 

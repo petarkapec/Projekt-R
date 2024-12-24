@@ -21,8 +21,8 @@ public class BrojiloService {
         return brojiloRepository.findAll();
     }
 
-    public Brojilo createBrojilo(Brojilo brojilo){
-        return brojiloRepository.save(brojilo);
+    public void createBrojilo(Brojilo brojilo){
+        brojiloRepository.save(brojilo);
     }
 
     public void deleteBrojilo(Integer id) {

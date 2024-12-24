@@ -21,8 +21,8 @@ public class KupacService {
         return kupacRepository.findAll();
     }
 
-    public Kupac createKupac(Kupac kupac){
-        return kupacRepository.save(kupac);
+    public void createKupac(Kupac kupac){
+        kupacRepository.save(kupac);
     }
 
     public void deleteKupac(Integer id) {

@@ -21,8 +21,8 @@ public class KupacController {
     }
 
     @PostMapping("/create")
-    public Kupac createKupac(@RequestBody Kupac kupac) {
-        return kupacService.createKupac(kupac);
+    public void createKupac(@RequestBody Kupac kupac) {
+        kupacService.createKupac(kupac);
     }
 
     @PostMapping("/delete/{id}")

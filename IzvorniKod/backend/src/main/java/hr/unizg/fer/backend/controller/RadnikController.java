@@ -21,8 +21,8 @@ public class RadnikController {
     }
 
     @PostMapping("/create")
-    public Radnik createRadnik(@RequestBody Radnik radnik){
-        return radnikService.createRadnik(radnik);
+    public void createRadnik(@RequestBody Radnik radnik){
+        radnikService.createRadnik(radnik);
     }
 
     @PostMapping("/delete/{id}")

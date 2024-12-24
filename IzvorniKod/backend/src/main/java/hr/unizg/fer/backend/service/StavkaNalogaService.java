@@ -21,8 +21,8 @@ public class StavkaNalogaService {
         return stavkaNalogaRepository.findAll();
     }
 
-    public StavkaNaloga createStavkaNaloga(StavkaNaloga stavkaNaloga){
-        return stavkaNalogaRepository.save(stavkaNaloga);
+    public void createStavkaNaloga(StavkaNaloga stavkaNaloga){
+        stavkaNalogaRepository.save(stavkaNaloga);
     }
 
     public void deleteStavkaNaloga(Integer id) {

@@ -31,7 +31,7 @@ public class Brojilo {
     @JsonBackReference("kupac-brojila")
     private Kupac idKupac;
 
-    @OneToMany(mappedBy = "idBrojilo")
+    @OneToMany(mappedBy = "idBrojilo", cascade = CascadeType.ALL)
     @JsonManagedReference("brojilo-stavke")
     private Set<StavkaNaloga> stavkaNalogas = new LinkedHashSet<>();
 

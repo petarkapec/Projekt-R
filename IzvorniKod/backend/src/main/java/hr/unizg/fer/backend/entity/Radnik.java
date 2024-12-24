@@ -25,6 +25,7 @@ public class Radnik {
     @Column(name = "telefon_radnik", length = 20)
     private String telefonRadnik;
 
+    // cascade = CascadeType.ALL ?
     @OneToMany(mappedBy = "idRadnik")
     @JsonManagedReference("radnik-nalozi")
     private Set<Nalog> nalogs = new LinkedHashSet<>();

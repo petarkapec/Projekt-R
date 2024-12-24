@@ -22,8 +22,8 @@ public class StavkaNalogaController {
     }
 
     @PostMapping("/create")
-    public StavkaNaloga createStavkaNaloga(@RequestBody StavkaNaloga stavkaNaloga) {
-        return stavkaNalogaService.createStavkaNaloga(stavkaNaloga);
+    public void createStavkaNaloga(@RequestBody StavkaNaloga stavkaNaloga) {
+        stavkaNalogaService.createStavkaNaloga(stavkaNaloga);
     }
 
     @PostMapping("/delete/{id}")

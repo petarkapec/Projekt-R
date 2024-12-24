@@ -22,8 +22,8 @@ public class OcitanjeController {
     }
 
     @PostMapping("/create")
-    public Ocitanje createOcitanje(@RequestBody Ocitanje ocitanje) {
-        return ocitanjeService.createOcitanje(ocitanje);
+    public void createOcitanje(@RequestBody Ocitanje ocitanje) {
+        ocitanjeService.createOcitanje(ocitanje);
     }
 
     @PostMapping("/delete/{id}")

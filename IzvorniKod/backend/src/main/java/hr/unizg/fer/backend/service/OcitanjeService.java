@@ -21,8 +21,8 @@ public class OcitanjeService {
         return ocitanjeRepository.findAll();
     }
 
-    public Ocitanje createOcitanje(Ocitanje ocitanje){
-        return ocitanjeRepository.save(ocitanje);
+    public void createOcitanje(Ocitanje ocitanje){
+        ocitanjeRepository.save(ocitanje);
     }
 
     public void deleteOcitanje(Integer id) {
