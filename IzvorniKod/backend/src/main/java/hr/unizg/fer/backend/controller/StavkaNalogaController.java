@@ -22,11 +22,16 @@ public class StavkaNalogaController {
     }
 
     @PostMapping("/create")
-    public void createStavkaNaloga(@RequestBody StavkaNaloga stavkaNaloga) {
-        stavkaNalogaService.createStavkaNaloga(stavkaNaloga);
+    public StavkaNaloga createStavkaNaloga(@RequestBody StavkaNaloga stavkaNaloga) {
+        return stavkaNalogaService.createStavkaNaloga(stavkaNaloga);
     }
 
-    @PostMapping("/delete/{id}")
+    @PutMapping("/update/{id}")
+    public StavkaNaloga updateStavkaNaloga(@PathVariable Integer id, @RequestBody StavkaNaloga stavkaNaloga) {
+        return stavkaNalogaService.updateStavkaNaloga(id, stavkaNaloga);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteStavkaNaloga(@PathVariable Integer id) {
         stavkaNalogaService.deleteStavkaNaloga(id);
     }

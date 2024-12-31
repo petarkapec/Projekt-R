@@ -5,6 +5,7 @@ import hr.unizg.fer.backend.service.KupacService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/kupci")
@@ -21,11 +22,16 @@ public class KupacController {
     }
 
     @PostMapping("/create")
-    public void createKupac(@RequestBody Kupac kupac) {
-        kupacService.createKupac(kupac);
+    public Kupac createKupac(@RequestBody Kupac kupac) {
+        return kupacService.createKupac(kupac);
     }
 
-    @PostMapping("/delete/{id}")
+    @PutMapping("/update/{id}")
+    public Kupac updateKupac(@PathVariable Integer id, @RequestBody Kupac kupac) {
+        return kupacService.updateKupac(id, kupac);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteKupac(@PathVariable Integer id) {
         kupacService.deleteKupac(id);
     }

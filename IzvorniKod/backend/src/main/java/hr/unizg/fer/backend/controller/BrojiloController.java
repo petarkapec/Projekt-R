@@ -6,6 +6,7 @@ import hr.unizg.fer.backend.service.BrojiloService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/brojila")
@@ -22,11 +23,16 @@ public class BrojiloController {
     }
 
     @PostMapping("/create")
-    public void createBrojilo(@RequestBody Brojilo brojilo) {
-        brojiloService.createBrojilo(brojilo);
+    public Brojilo createBrojilo(@RequestBody Brojilo brojilo) {
+        return brojiloService.createBrojilo(brojilo);
     }
 
-    @PostMapping("/delete/{id}")
+    @PutMapping("/update/{id}")
+    public Brojilo updateBrojilo(@PathVariable Integer id, @RequestBody Brojilo brojilo) {
+        return brojiloService.updateBrojilo(id, brojilo);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteBrojilo(@PathVariable Integer id) {
         brojiloService.deleteBrojilo(id);
     }

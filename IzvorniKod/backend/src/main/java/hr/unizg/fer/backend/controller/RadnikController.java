@@ -21,11 +21,16 @@ public class RadnikController {
     }
 
     @PostMapping("/create")
-    public void createRadnik(@RequestBody Radnik radnik){
-        radnikService.createRadnik(radnik);
+    public Radnik createRadnik(@RequestBody Radnik radnik){
+        return radnikService.createRadnik(radnik);
     }
 
-    @PostMapping("/delete/{id}")
+    @PutMapping("/update/{id}")
+    public Radnik updateRadnik(@PathVariable Integer id, @RequestBody Radnik radnik) {
+        return radnikService.updateRadnik(id, radnik);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteRadnik(@PathVariable Integer id) {
         radnikService.deleteRadnik(id);
     }

@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/nalozi")
@@ -30,16 +31,18 @@ public class NalogController {
     }
 
     @PostMapping("/create")
-    public void createNalog(@RequestBody Nalog nalog) {
-        nalogService.createNalog(nalog);
+    public Nalog createNalog(@RequestBody Nalog nalog) {
+        return nalogService.createNalog(nalog);
     }
 
-    @PostMapping("/delete/{id}")
+    @PutMapping("/update/{id}")
+    public Nalog updateNalog(@PathVariable Integer id, @RequestBody Nalog nalog) {
+        return nalogService.updateNalog(id, nalog);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteNalog(@PathVariable Integer id) {
-        try {
-            nalogService.deleteNalog(id);
-        } catch (EntityNotFoundException ignored) {
-        }
+        nalogService.deleteNalog(id);
     }
 
     @PostMapping("/{nalogId}/addstavka")

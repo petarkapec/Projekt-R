@@ -6,6 +6,7 @@ import hr.unizg.fer.backend.service.OcitanjeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ocitanja")
@@ -22,11 +23,16 @@ public class OcitanjeController {
     }
 
     @PostMapping("/create")
-    public void createOcitanje(@RequestBody Ocitanje ocitanje) {
-        ocitanjeService.createOcitanje(ocitanje);
+    public Ocitanje createOcitanje(@RequestBody Ocitanje ocitanje) {
+        return ocitanjeService.createOcitanje(ocitanje);
     }
 
-    @PostMapping("/delete/{id}")
+    @PutMapping("/update/{id}")
+    public Ocitanje updateOcitanje(@PathVariable Integer id, @RequestBody Ocitanje ocitanje) {
+        return ocitanjeService.updateOcitanje(id, ocitanje);
+    }
+
+    @DeleteMapping("/delete/{id}")
     public void deleteOcitanje(@PathVariable Integer id) {
         ocitanjeService.deleteOcitanje(id);
     }

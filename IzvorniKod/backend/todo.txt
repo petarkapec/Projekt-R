@@ -6,7 +6,5 @@ post ocitanje (nalog id, stavka id) {
 }
 
 - ocitanje ima idNalog a treba imati idStavka?
-- napraviti provjere za sve post delete
-- napraviti edit metode za sve podatke
-- napraviti handleanje svih exceptiona
-- napraviti validaciju podataka
+- napraviti provjere za sve post delete kao u nalogu
+- napraviti validaciju podataka (možda)

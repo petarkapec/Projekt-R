@@ -3,6 +3,7 @@ package hr.unizg.fer.backend.service;
 import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.entity.StavkaNaloga;
 import hr.unizg.fer.backend.repository.StavkaNalogaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,19 @@ public class StavkaNalogaService {
         return stavkaNalogaRepository.findAll();
     }
 
-    public void createStavkaNaloga(StavkaNaloga stavkaNaloga){
-        stavkaNalogaRepository.save(stavkaNaloga);
+    public StavkaNaloga createStavkaNaloga(StavkaNaloga stavkaNaloga){
+        return stavkaNalogaRepository.save(stavkaNaloga);
+    }
+
+    public StavkaNaloga updateStavkaNaloga(Integer id, StavkaNaloga updatedStavkaNaloga) {
+        StavkaNaloga stavkaNaloga = stavkaNalogaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("StavkaNaloga with ID " + id + " not found"));
+
+        stavkaNaloga.setAdresaBrojila(updatedStavkaNaloga.getAdresaBrojila());
+        stavkaNaloga.setIdBrojilo(updatedStavkaNaloga.getIdBrojilo());
+        stavkaNaloga.setIdNalog(updatedStavkaNaloga.getIdNalog());
+
+        return stavkaNalogaRepository.save(stavkaNaloga);
     }
 
     public void deleteStavkaNaloga(Integer id) {

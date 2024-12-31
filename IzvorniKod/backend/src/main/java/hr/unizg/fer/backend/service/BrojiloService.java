@@ -3,10 +3,12 @@ package hr.unizg.fer.backend.service;
 import hr.unizg.fer.backend.entity.Brojilo;
 import hr.unizg.fer.backend.entity.Kupac;
 import hr.unizg.fer.backend.repository.BrojiloRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BrojiloService {
@@ -21,8 +23,20 @@ public class BrojiloService {
         return brojiloRepository.findAll();
     }
 
-    public void createBrojilo(Brojilo brojilo){
-        brojiloRepository.save(brojilo);
+    public Brojilo createBrojilo(Brojilo brojilo){
+        return brojiloRepository.save(brojilo);
+    }
+
+    public Brojilo updateBrojilo(Integer id, Brojilo updatedBrojilo) {
+        Brojilo brojilo = brojiloRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Brojilo with ID " + id + " not found"));
+
+        brojilo.setSerijskiBrojBrojilo(updatedBrojilo.getSerijskiBrojBrojilo());
+        brojilo.setTipBrojila(updatedBrojilo.getTipBrojila());
+        brojilo.setAdresa(updatedBrojilo.getAdresa());
+        brojilo.setIdKupac(updatedBrojilo.getIdKupac());
+
+        return brojiloRepository.save(brojilo);
     }
 
     public void deleteBrojilo(Integer id) {

@@ -3,6 +3,7 @@ package hr.unizg.fer.backend.service;
 import hr.unizg.fer.backend.entity.Radnik;
 import hr.unizg.fer.backend.repository.KupacRepository;
 import hr.unizg.fer.backend.repository.RadnikRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,20 @@ public class RadnikService {
         return radnikRepository.findAll();
     }
 
-    public void createRadnik(Radnik radnik){
-        radnikRepository.save(radnik);
+    public Radnik createRadnik(Radnik radnik){
+        return radnikRepository.save(radnik);
+    }
+
+    public Radnik updateRadnik(Integer id, Radnik updatedRadnik) {
+        Radnik radnik = radnikRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Radnik with ID " + id + " not found"));
+
+        radnik.setImeRadnik(updatedRadnik.getImeRadnik());
+        radnik.setPrezimeRadnik(updatedRadnik.getPrezimeRadnik());
+        radnik.setTelefonRadnik(updatedRadnik.getTelefonRadnik());
+        radnik.setNalogs(updatedRadnik.getNalogs());
+
+        return radnikRepository.save(radnik);
     }
 
     public void deleteRadnik(Integer id) {

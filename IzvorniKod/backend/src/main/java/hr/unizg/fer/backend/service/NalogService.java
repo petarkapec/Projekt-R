@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NalogService {
@@ -37,8 +38,21 @@ public class NalogService {
         return nalogRepository.findByIdRadnik(radnikId);
     }
 
-    public void createNalog(Nalog nalog){
-        nalogRepository.save(nalog);
+    public Nalog createNalog(Nalog nalog){
+        return nalogRepository.save(nalog);
+    }
+
+    public Nalog updateNalog(Integer id, Nalog updatedNalog) {
+        Nalog nalog = nalogRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nalog with ID " + id + " not found"));
+
+        nalog.setDatumNalog(updatedNalog.getDatumNalog());
+        nalog.setStatusNalog(updatedNalog.getStatusNalog());
+        nalog.setIdRadnik(updatedNalog.getIdRadnik());
+        nalog.setOcitanja(updatedNalog.getOcitanja());
+        nalog.setStavkeNaloga(updatedNalog.getStavkeNaloga());
+
+        return nalogRepository.save(nalog);
     }
 
     public void deleteNalog(Integer id) {
