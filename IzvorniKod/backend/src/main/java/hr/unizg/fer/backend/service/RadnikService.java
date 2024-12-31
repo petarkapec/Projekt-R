@@ -1,5 +1,6 @@
 package hr.unizg.fer.backend.service;
 
+import hr.unizg.fer.backend.entity.Nalog;
 import hr.unizg.fer.backend.entity.Radnik;
 import hr.unizg.fer.backend.repository.KupacRepository;
 import hr.unizg.fer.backend.repository.RadnikRepository;
@@ -41,6 +42,8 @@ public class RadnikService {
     }
 
     public void deleteRadnik(Integer id) {
-        radnikRepository.deleteById(id);
+        Radnik radnik = radnikRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nije pronađen radnik sa id: " + id));
+        radnikRepository.delete(radnik);
     }
 }

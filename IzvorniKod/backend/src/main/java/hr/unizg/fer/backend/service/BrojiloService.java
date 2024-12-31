@@ -2,6 +2,7 @@ package hr.unizg.fer.backend.service;
 
 import hr.unizg.fer.backend.entity.Brojilo;
 import hr.unizg.fer.backend.entity.Kupac;
+import hr.unizg.fer.backend.entity.Nalog;
 import hr.unizg.fer.backend.repository.BrojiloRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class BrojiloService {
     }
 
     public void deleteBrojilo(Integer id) {
-        brojiloRepository.deleteById(id);
+        Brojilo brojilo = brojiloRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nije pronađeno brojilo sa id: " + id));
+        brojiloRepository.delete(brojilo);
     }
 }

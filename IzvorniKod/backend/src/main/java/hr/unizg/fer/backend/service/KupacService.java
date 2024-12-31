@@ -40,6 +40,8 @@ public class KupacService {
     }
 
     public void deleteKupac(Integer id) {
-        kupacRepository.deleteById(id);
+        Kupac kupac = kupacRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nije pronađen kupac sa id: " + id));
+        kupacRepository.delete(kupac);
     }
 }

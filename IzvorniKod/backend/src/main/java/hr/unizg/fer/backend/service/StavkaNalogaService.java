@@ -1,6 +1,7 @@
 package hr.unizg.fer.backend.service;
 
 import hr.unizg.fer.backend.entity.Kupac;
+import hr.unizg.fer.backend.entity.Nalog;
 import hr.unizg.fer.backend.entity.StavkaNaloga;
 import hr.unizg.fer.backend.repository.StavkaNalogaRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -38,6 +39,8 @@ public class StavkaNalogaService {
     }
 
     public void deleteStavkaNaloga(Integer id) {
-        stavkaNalogaRepository.deleteById(id);
+        StavkaNaloga stavkaNaloga = stavkaNalogaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nije pronađena stavka naloga sa id: " + id));
+        stavkaNalogaRepository.delete(stavkaNaloga);
     }
 }

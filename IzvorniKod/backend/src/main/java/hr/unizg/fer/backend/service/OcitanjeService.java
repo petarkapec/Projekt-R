@@ -1,5 +1,6 @@
 package hr.unizg.fer.backend.service;
 
+import hr.unizg.fer.backend.entity.Nalog;
 import hr.unizg.fer.backend.entity.Ocitanje;
 import hr.unizg.fer.backend.repository.OcitanjeRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -39,6 +40,8 @@ public class OcitanjeService {
     }
 
     public void deleteOcitanje(Integer id) {
-        ocitanjeRepository.deleteById(id);
+        Ocitanje ocitanje = ocitanjeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Nije pronađeno očitanje sa id: " + id));
+        ocitanjeRepository.delete(ocitanje);
     }
 }
